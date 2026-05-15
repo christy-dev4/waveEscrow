@@ -1,0 +1,31 @@
+[package]
+name = "wave-escrow"
+version = "0.1.0"
+edition = "2021"
+description = "Milestone-based point locker for Drips reward distribution on Arbitrum Stylus"
+authors = ["Drips Ecosystem"]
+license = "MIT"
+
+[features]
+default = ["export"]
+export = ["stylus-sdk/export"]
+
+[dependencies]
+stylus-sdk = "0.7"
+alloy-primitives = { version = "0.8", features = ["serde"] }
+alloy-sol-types = "0.8"
+mini-alloc = "0.4"
+sha3 = "0.10"
+
+[dev-dependencies]
+stylus-sdk = { version = "0.7", features = ["test"] }
+tokio = { version = "1", features = ["full"] }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = "symbols"
+
+[profile.dev]
+opt-level = 0
